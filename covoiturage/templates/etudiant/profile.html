@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mon Profil - CovoiTudiant</title>
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="{% static 'navbar.css' %}">
+<link rel="stylesheet" href="{% static 'footer.css' %}">
+<link rel="stylesheet" href="{% static 'profile.css' %}">
+<link rel="stylesheet" href="{% static 'message.css' %}">
+</head>
+
+<body>
+
+{% include 'partials/navbar.html' %}
+
+{% include 'message/message.html' %}
+<div class="background">
+
+    <div class="circle circle1"></div>
+
+    <div class="circle circle2"></div>
+
+</div>
+
+
+<form method="POST" enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+
+    <div class="profile-container">
+
+
+        <div class="profile-card">
+
+
+            <div class="profile-image">
+
+                {% if etudiant.photo %}
+
+                    <img
+                    src="{{ etudiant.photo.url }}"
+                    alt="Photo de profil">
+
+                {% else %}
+
+                    <img
+                    src="{% static 'default.png' %}"
+                    alt="Photo par défaut">
+
+                {% endif %}
+
+
+                <label class="upload-btn">
+
+                    <i class="fa-solid fa-camera"></i>
+
+                    <input
+                    type="file"
+                    name="photo">
+
+                </label>
+
+            </div>
+
+
+            <h1 class="profile-name">
+
+                {{ user.first_name }}
+                {{ user.last_name }}
+
+            </h1>
+
+            <div class="profile-role">
+
+                Étudiant
+
+            </div>
+
+           
+
+
+            <div class="stats">
+
+                <div class="stat-box">
+
+                    <h2>{{ etudiant.total_trajets }}</h2>
+
+                    <p>Trajets</p>
+
+                </div>
+
+                <div class="stat-box">
+
+                    <h2>{{ etudiant.total_reservations }}</h2>
+
+                    <p>Réservations</p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-content">
+
+
+            <div class="info-card">
+
+                <div class="card-title">
+
+                    <div class="icon">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+                    <h2>Informations personnelles</h2>
+
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+
+                        <label>Nom</label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            <input
+                            type="text"
+                            name="nom"
+                            value="{{ user.last_name }}">
+
+                        </div>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>Prénom</label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            <input
+                            type="text"
+                            name="prenom"
+                            value="{{ user.first_name }}">
+
+                        </div>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>Email</label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                            <input
+                            type="email"
+                            name="email"
+                            value="{{ user.email }}" readonly>
+
+                        </div>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>Téléphone</label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-phone"></i>
+
+                            <input
+                            type="text"
+                            name="telephone"
+                            value="{{ etudiant.telephone }}">
+
+                        </div>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>Filière</label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-graduation-cap"></i>
+
+                            <input
+                            type="text"
+                            name="filiere"
+                            value="{{ etudiant.filiere }}">
+
+                        </div>
+
+                    </div>
+
+                
+
+                </div>
+
+                <button
+                type="submit"
+                class="save-btn">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Enregistrer les modifications
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</form>
+
+{% include 'partials/footer.html' %}
+<script>
+
+function closePopup(){
+
+    document
+    .querySelector('.popup-overlay')
+    .style.display='none';
+}
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CovoiTudiant - Accueil</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="{% static 'acceuil.css' %}">
+    <link rel="stylesheet" href="{% static 'navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <link rel="stylesheet" href="{% static 'message.css' %}">
+</head>
+
+<body>
+
+{% include 'partials/navbar.html' %}
+{% include 'message/message.html' %}
+   <section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-text">
+
+            <div class="badge">
+                🚗 Plateforme moderne de covoiturage étudiant
+            </div>
+
+            <h1>
+
+                Voyagez plus
+                <span>intelligemment</span>
+
+            </h1>
+
+            <p>
+
+                CovoiTudiant connecte les étudiants pour partager
+                des trajets, économiser de l’argent et voyager
+                dans une expérience moderne, rapide et sécurisée.
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="{% url 'trajets' %}" class="btn-primary">
+
+                    <i class="fa-solid fa-road"></i>
+
+                    Explorer les trajets
+
+                </a>
+
+                <a href="#" class="btn-secondary">
+
+                    <i class="fa-solid fa-play"></i>
+
+                    Découvrir
+
+                </a>
+
+            </div>
+
+        </div>
+
+        
+
+        <div class="hero-card">
+
+<div class="card-top">
+
+    <div class="driver">
+
+        <div class="driver-avatar">
+
+            {% if trajet and trajet.conducteur_ref.photo %}
+
+                <img
+                src="{{ trajet.conducteur_ref.photo.url }}"
+                alt="conducteur">
+
+            {% else %}
+
+                <img
+                src="{% static 'default.png' %}"
+                alt="default">
+
+            {% endif %}
+
+        </div>
+
+        <div class="driver-info">
+
+            <h3>
+
+                {% if trajet %}
+
+                    {{ trajet.conducteur_ref.user.first_name }}
+                    {{ trajet.conducteur_ref.user.last_name }}
+
+                {% else %}
+
+                    -
+
+                {% endif %}
+
+            </h3>
+
+            <span>
+                Conducteur vérifié
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="price">
+
+        {% if trajet %}
+
+            {{ trajet.prix }} DH
+
+        {% else %}
+
+            35 DH
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+            <div class="route">
+
+                <div class="location">
+
+                    <div class="dot start"></div>
+
+                    <div>
+
+                        <h4>{% if trajet %}{{ trajet.ville_depart }}{% else %}-{% endif %}</h4>
+
+                        <span>{% if trajet %}{{ trajet.heure_depart }}{% else %}-{% endif %}</span>
+
+                    </div>
+
+                </div>
+
+                <div class="route-line"></div>
+
+                <div class="location">
+
+                    <div class="dot end"></div>
+
+                    <div>
+
+                        <h4>{% if trajet %}{{ trajet.ville_arrivee }}{% else %}-{% endif %}</h4>
+
+                        <span>Destination</span>
+                    </div>
+
+                </div>
+    <div class="infos">
+
+                <div class="info-box">
+
+                    <span>
+                        Date
+                    </span>
+
+                    <h3>
+                        {{ trajet.date }}
+                    </h3>
+
+                </div>
+
+                <div class="info-box">
+
+                    <span>
+                        Places disponibles
+                    </span>
+
+                    <h3>
+                       {{ trajet.place_disponible }} places
+                    </h3>
+
+                </div>
+
+            </div>
+
+          
+          {% if not trajet.est_complet and not trajet.est_reserver %}
+
+        <form action="ReserverTrajet/{{ trajet.id }}/"
+            method="POST">
+
+        {% csrf_token %}
+
+        <button class="reserve-btn">
+
+            <i class="fa-solid fa-bookmark"></i>
+
+          Réserver une place
+
+        </button>
+
+        </form>
+
+            {% elif trajet.est_reserver %}
+
+            <button
+            class="reserve-btn reserved"
+            disabled>
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            Déjà réservé
+
+            </button>
+
+            {% elif trajet.est_complet %}
+
+            <button
+            class="reserve-btn complete"
+            disabled>
+
+            <i class="fa-solid fa-ban"></i>
+
+            Trajet complet
+
+            </button>
+
+            {% endif %}  
+            </div>
+        
+        </div>
+
+    </div>
+
+</section>
+
+
+    <section class="features">
+
+        <div class="section-title">
+            <h2>Pourquoi choisir CovoiTudiant ?</h2>
+            <p>Une plateforme simple, rapide et sécurisée</p>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <i class="fa-solid fa-route"></i>
+                <h3>Trajets rapides</h3>
+                <p>
+                    Trouvez facilement des trajets étudiants
+                    vers votre destination.
+                </p>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-money-bill-wave"></i>
+                <h3>Économie</h3>
+                <p>
+                    Partagez les frais de déplacement
+                    et économisez votre argent.
+                </p>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>Sécurité</h3>
+                <p>
+                    Voyagez avec des étudiants
+                    vérifiés et fiables.
+                </p>
+                  </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+    </section>
+
+
+    <section class="stats">
+
+        <div class="stats-container">
+
+            <div class="stat">
+                <h2>{{ total_Etudiants }}</h2>
+                <p>Étudiants inscrits</p>
+            </div>
+
+            <div class="stat">
+                <h2>{{total_trajets}}</h2>
+                <p>Trajets réalisés</p>
+            </div>
+
+            <div class="stat">
+                <h2>{{total_reservations}} </h2>
+                <p>Réservations</p>
+            </div>
+
+            <div class="stat">
+                <h2>100%</h2>
+                <p>Satisfaction</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    {% include 'partials/footer.html' %}
+<script>
+
+function closePopup(){
+
+    document
+    .querySelector('.popup-overlay')
+    .style.display='none';
+}
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>Détail réservation - CovoiTudiant</title>
+
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <link rel="stylesheet"
+    href="{% static 'navbar.css' %}">
+
+    <link rel="stylesheet"
+    href="{% static 'footer.css' %}">
+
+    <link rel="stylesheet"
+    href="{% static 'detailReservation.css' %}">
+
+</head>
+
+<body>
+
+{% include 'partials/navbar.html' %}
+
+<div class="detail-container">
+
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>
+                Détail de réservation
+            </h1>
+
+            <p>
+                Consultez les informations du trajet et du conducteur
+            </p>
+
+        </div>
+
+        <div class="reservation-status">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            Réservation confirmée
+
+        </div>
+
+    </div>
+
+
+    <div class="detail-grid">
+
+
+        <div class="driver-card">
+
+            <div class="card-title">
+
+                <i class="fa-solid fa-user"></i>
+
+                <span>Conducteur</span>
+
+            </div>
+
+            <div class="driver-profile">
+
+                {% if reservation.trajet.conducteur_ref.photo %}
+
+                <img
+                src="{{ reservation.trajet.conducteur_ref.photo.url }}"
+                alt="conducteur">
+
+                {% else %}
+
+                <img
+                src="{% static 'default.png' %}"
+                alt="default">
+
+                {% endif %}
+
+                <h2>
+
+                    {{ reservation.trajet.conducteur_ref.user.first_name }}
+                    {{ reservation.trajet.conducteur_ref.user.last_name }}
+
+                </h2>
+
+                <span>
+                    Étudiant conducteur
+                </span>
+
+            </div>
+
+            <div class="driver-info">
+
+                <div class="info-item">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <span>
+                        {{ reservation.trajet.conducteur_ref.user.email }}
+                    </span>
+
+                </div>
+
+                <div class="info-item">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                    <span>
+                        {{ reservation.trajet.conducteur_ref.telephone }}
+                    </span>
+
+                </div>
+
+                <div class="info-item">
+
+                    <i class="fa-solid fa-graduation-cap"></i>
+
+                    <span>
+                        {{ reservation.trajet.conducteur_ref.filiere }}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="trajet-card">
+
+            <div class="card-title">
+
+                <i class="fa-solid fa-road"></i>
+
+                <span>Informations du trajet</span>
+
+            </div>
+
+
+            <div class="route">
+
+                <div class="line"></div>
+
+                <div class="dot start"></div>
+
+                <div class="dot end"></div>
+
+                <div class="city">
+
+                    <h2>
+                        {{ reservation.trajet.ville_depart }}
+                    </h2>
+
+                    <span>
+                        Départ
+                    </span>
+
+                </div>
+
+                <div class="city">
+
+                    <h2>
+                        {{ reservation.trajet.ville_arrivee }}
+                    </h2>
+
+                    <span>
+                        Destination
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="trajet-infos">
+
+                <div class="box">
+
+                    <span>Date</span>
+
+                    <h3>
+                        {{ reservation.trajet.date }}
+                    </h3>
+
+                </div>
+
+                <div class="box">
+
+                    <span>Heure</span>
+
+                    <h3>
+                        {{ reservation.trajet.heure_depart }}
+                    </h3>
+
+                </div>
+
+                <div class="box">
+
+                    <span>Prix</span>
+
+                    <h3>
+                        {{ reservation.trajet.prix }} DH
+                    </h3>
+
+                </div>
+
+                <div class="box">
+
+                    <span>Places restantes</span>
+
+                    <h3>
+                        {{ reservation.trajet.place_disponible }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="actions">
+
+                <a href="mailto:{reservation.trajet.conducteur_ref.user.email}"
+                class="message-btn">
+
+                    <i class="fa-solid fa-paper-plane"></i>
+
+                    Contacter
+
+                </a>
+
+                <form
+                method="POST"
+                action="{% url 'AnnulerReservation' reservation.id %}">
+
+                    {% csrf_token %}
+
+                    <button class="cancel-btn">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                        Annuler réservation
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% include 'partials/footer.html' %}
+
+</body>
+
+</html>

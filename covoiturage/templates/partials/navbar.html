@@ -1,0 +1,125 @@
+<nav class="navbar">
+
+    <div class="nav-left">
+
+        <div class="logo-circle">
+            <i class="fa-solid fa-car-side"></i>
+        </div>
+
+        <div class="logo-text">
+            <h2>CovoiTudiant</h2>
+            <span>Smart Student Ride</span>
+        </div>
+
+    </div>
+
+    <div class="nav-center">
+
+        <a href="{% url 'home' %}" class="{% if request.path == '/home/' %}active{% endif %}">
+            <i class="fa-solid fa-house"></i>
+            <span>Accueil</span>
+        </a>
+
+        <a href="{% url 'trajets' %}"class="{% if request.path == '/trajets/' %}active{% endif %}">
+            <i class="fa-solid fa-road"></i>
+            <span>Trajets</span>
+        </a>
+
+        <a href="{% url 'MesReservations' %}"class="{% if request.path == '/MesReservations/' %}active{% endif %}">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>Réservations</span>
+        </a>
+
+ 
+
+    </div>
+
+    <div class="nav-right">
+
+        {% if user.is_authenticated %}
+
+        <div class="profile-dropdown">
+
+            <div class="profile-box">
+
+            <div class="profile-avatar">
+                <img src="{{ user.etudiant.photo.url }}">      
+              </div>
+
+                <div class="profile-info">
+                    <h4>{{ user.first_name }}</h4>
+                    <span>Étudiant</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-down arrow"></i>
+
+            </div>
+
+            <div class="dropdown-menu">
+
+                <div class="dropdown-header">
+
+                    <div class="profile-avatar">
+                        <img src="{{ user.etudiant.photo.url }}">      
+                    </div>             
+
+                    <div>
+                        <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+                        <p>{{ user.email }}</p>
+                    </div>
+
+                </div>
+
+                <div class="dropdown-links">
+
+                    <a href="{% url 'profile' %}">
+
+                    <img
+                    src="{{ user.etudiant.photo.url }}"
+                    alt="profile">
+
+                    <span>Mon profil</span>
+
+                    </a>
+
+                    <a href="{% url 'MesTrajets' %}">
+                        <i class="fa-solid fa-car-side"></i>
+                        Mes trajets
+                    </a>
+
+                    <a href="{% url 'MesReservations' %}">
+                        <i class="fa-solid fa-bookmark"></i>
+                        Mes réservations
+                    </a>
+
+                    <div class="line"></div>
+
+                    <a href="{% url 'logout' %}" class="logout">
+
+                        <i class="fa-solid fa-right-from-bracket"></i>
+
+                        Déconnexion
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <a href="{% url 'login' %}" class="login-btn">
+
+            <i class="fa-solid fa-right-to-bracket"></i>
+
+            Connexion
+
+        </a>
+
+        {% endif %}
+
+    </div>
+
+</nav>

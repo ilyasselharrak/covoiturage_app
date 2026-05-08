@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>Trajets disponibles - CovoiTudiant</title>
+
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <link rel="stylesheet"
+    href="{% static 'navbar.css' %}">
+
+    <link rel="stylesheet"
+    href="{% static 'footer.css' %}">
+
+    <link rel="stylesheet"
+    href="{% static 'trajet.css' %}">
+    <link rel="stylesheet" href="{% static 'message.css' %}">
+</head>
+
+<body>
+
+{% include 'partials/navbar.html' %}
+
+
+
+{% include 'message/message.html' %}
+<div class="container">
+
+    <div class="header">
+
+        <div class="title">
+
+            <h1>
+                Trajets disponibles
+            </h1>
+
+            <p>
+                Trouvez facilement votre prochain trajet étudiant
+            </p>
+
+        </div>
+
+        <form class="search-box">
+
+            <div class="search-input">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <input
+                type="text"
+                name="ville_depart"
+                placeholder="Ville de départ">
+
+            </div>
+
+            <div class="search-input">
+
+                <i class="fa-solid fa-calendar"></i>
+
+                <input
+                type="date"
+                name="date">
+
+            </div>
+
+        </form>
+
+    </div>
+
+    {% if trajets %}
+
+    <div class="trajets">
+
+        {% for trajet in trajets %}
+
+        <div class="trajet-card">
+
+            <!-- TOP -->
+
+            <div class="top">
+
+                <div class="driver">
+
+                    {% if trajet.conducteur_ref.photo %}
+
+                    <img
+                    src="{{ trajet.conducteur_ref.photo.url }}">
+
+                    {% else %}
+
+                    <img
+                    src="{% static 'default.png' %}">
+
+                    {% endif %}
+
+                    <div class="driver-info">
+
+                        <h3>
+                            {{ trajet.conducteur_ref.user.first_name }} {{ trajet.conducteur_ref.user.last_name }}
+                        </h3>
+
+                        <span>
+                            Conducteur
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="price">
+
+                    {{ trajet.prix }} DH
+
+                </div>
+
+            </div>
+
+            <div class="road">
+
+                <div class="line"></div>
+
+                <div class="dot dot-start"></div>
+
+                <div class="dot dot-end"></div>
+
+                <div class="city">
+
+                    <h2>
+                        {{ trajet.ville_depart }}
+                    </h2>
+
+                    <span>
+                        {{ trajet.heure_depart }}
+                    </span>
+
+                </div>
+
+                <div class="city">
+
+                    <h2>
+                        {{ trajet.ville_arrivee }}
+                    </h2>
+
+                    <span>
+                        Destination
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="infos">
+
+                <div class="info-box">
+
+                    <span>
+                        Date
+                    </span>
+
+                    <h3>
+                        {{ trajet.date }}
+                    </h3>
+
+                </div>
+
+                <div class="info-box">
+
+                    <span>
+                        Places disponibles
+                    </span>
+
+                    <h3>
+                       {{ trajet.place_disponible }} places
+                    </h3>
+
+                </div>
+
+            </div>
+          {% if not trajet.est_complet and not trajet.est_reserver %}
+
+        <form action="ReserverTrajet/{{ trajet.id }}/"
+            method="POST">
+
+        {% csrf_token %}
+
+        <button class="reserve-btn">
+
+            <i class="fa-solid fa-bookmark"></i>
+
+          Réserver une place
+
+        </button>
+
+        </form>
+
+            {% elif trajet.est_reserver %}
+
+            <button
+            class="reserve-btn reserved"
+            disabled>
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            Déjà réservé
+
+            </button>
+
+            {% elif trajet.est_complet %}
+
+            <button
+            class="reserve-btn complete"
+            disabled>
+
+            <i class="fa-solid fa-ban"></i>
+
+            Trajet complet
+
+            </button>
+
+            {% endif %}       
+             </div>
+
+         {% endfor %}
+
+        </div>
+
+        {% else %}
+
+
+    <div class="empty-state">
+
+        <i class="fa-solid fa-road-circle-xmark"></i>
+
+        <h2>
+            Aucun trajet disponible
+        </h2>
+
+        <p>
+            Aucun étudiant n'a encore publié de trajet.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+
+
+
+
+</div>
+
+{% include 'partials/footer.html' %}
+<script>
+
+function closePopup(){
+
+    document
+    .querySelector('.popup-overlay')
+    .style.display='none';
+}
+
+</script>
+</body>
+
+</html>

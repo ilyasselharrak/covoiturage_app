@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>Modifier un trajet</title>
+
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <link rel="stylesheet"
+    href="{% static 'navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'AjouterTrajet.css' %}">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <link rel="stylesheet" href="{% static 'message.css' %}">
+
+</head>
+
+<body>
+
+{% include 'partials/navbar.html' %}
+{% include 'message/message.html' %}
+<div class="container">
+
+
+    <div class="header">
+
+        <h1>
+            Modifier un trajet
+        </h1>
+
+        <p>
+            Modifiez les informations de votre trajet étudiant
+        </p>
+
+    </div>
+
+
+    <div class="form-card">
+
+        <div class="card-header">
+
+            <div class="card-icon">
+
+                <i class="fa-solid fa-road"></i>
+
+            </div>
+
+            <div>
+
+                <h2>
+                    Modifier trajet
+                </h2>
+
+                <p>
+                    Remplissez les informations du trajet
+                </p>
+
+            </div>
+
+        </div>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="form-grid">
+
+
+                <div class="input-group">
+
+                    <label>
+                        Ville de départ
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <input
+                        type="text"
+                        name="ville_depart"
+                        value="{{ trajet.ville_depart }}"
+                        required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Ville d'arrivée
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-map-location-dot"></i>
+
+                        <input
+                        type="text"
+                        name="ville_arrivee"
+                        value="{{ trajet.ville_arrivee }}"
+                        required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Date du trajet
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-calendar"></i>
+
+                        <input
+                        type="date"
+                        name="date"
+                        value="{{ trajet.date|date:'Y-m-d' }}" required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Heure de départ
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        <input
+                        type="time"
+                        name="heure_depart"
+                        value="{{ trajet.heure_depart|time:'H:i' }}"
+                        required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Prix du trajet
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-money-bill-wave"></i>
+
+                        <input
+                        type="number"
+                        name="prix"
+                        placeholder="Ex : 35"
+                        value="{{ trajet.prix }}"
+                        required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Nombre de places
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-users"></i>
+
+                        <input
+                        type="number"
+                        name="nb_place"
+                        value="{{ trajet.nb_place }}"
+                        required>
+
+                    </div>
+
+                </div>
+
+  
+
+            </div>
+
+            <button
+            type="submit"
+            class="submit-btn">
+
+                <i class="fa-solid fa-edit"></i>
+
+                Modifier le trajet
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% include 'partials/footer.html' %}
+<script>
+
+function closePopup(){
+
+    document
+    .querySelector('.popup-overlay')
+    .style.display='none';
+}
+
+</script>
+</body>
+
+</html>

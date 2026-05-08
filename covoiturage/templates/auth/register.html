@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CovoiTudiant - Inscription</title>
+    <link rel="stylesheet" href="{% static 'register.css' %}">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="{% static 'message.css' %}">
+</head>
+
+<body>
+ 
+    {% include 'message/message.html' %}
+
+    <div class="card">
+
+        <div class="logo">
+
+            <div class="icon">
+                <i class="fa-solid fa-user-plus"></i>
+            </div>
+
+            <h1>CovoiTudiant</h1>
+
+            <p>Créer votre compte étudiant</p>
+
+        </div>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="input-group">
+                <label>Nom</label>
+
+                <div class="input-box">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" name="nom" placeholder="Votre nom" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Prénom</label>
+
+                <div class="input-box">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" name="prenom" placeholder="Votre prénom" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+
+                <div class="input-box">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" name="email" placeholder="exemple@gmail.com" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Filière</label>
+
+                <div class="input-box">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <input type="text" name="filiere" placeholder="Informatique..." required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Téléphone</label>
+
+                <div class="input-box">
+                    <i class="fa-solid fa-phone"></i>
+                    <input type="text" name="telephone" placeholder="06XXXXXXXX" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Mot de passe</label>
+
+                <div class="input-box">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" name="password" placeholder="********" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn">
+                <i class="fa-solid fa-user-plus"></i>
+                <i class="fa-solid fa-left-to-bracket"></i>
+            </button>
+
+        </form>
+
+        <div class="link">
+            Déjà un compte ?
+            <a href="{% url 'login' %}">
+                <i class="fa-solid fa-right-to-bracket"></i>
+            </a>
+        </div>
+
+    </div>
+<script>
+
+function closePopup(){
+
+    document
+    .querySelector('.popup-overlay')
+    .style.display='none';
+}
+
+</script>
+</body>
+
+</html>

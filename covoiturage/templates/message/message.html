@@ -1,0 +1,37 @@
+{% if messages %}
+
+<div class="popup-overlay">
+
+    {% for message in messages %}
+
+    <div class="popup-success">
+
+        <div class="popup-icon">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+        </div>
+
+        <h2>
+            {{message.tags|title}}
+        </h2>
+
+        <p>
+            {{ message }}
+        </p>
+
+        <button
+        class="popup-btn"
+        onclick="closePopup()">
+
+            OK
+
+        </button>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endif %}

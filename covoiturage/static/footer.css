@@ -1,0 +1,51 @@
+footer{
+
+    background:#020617;
+
+    padding:40px;
+
+    text-align:center;
+
+    color:white;
+}
+
+footer p{
+    margin-bottom:20px;
+    color:#cbd5e1;
+}
+
+.social{
+
+    display:flex;
+    justify-content:center;
+    gap:18px;
+}
+
+.social a{
+
+    width:52px;
+    height:52px;
+
+    border-radius:18px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#111827;
+
+    color:white;
+
+    text-decoration:none;
+
+    transition:0.35s;
+
+    font-size:18px;
+}
+
+.social a:hover{
+
+    transform:translateY(-5px) rotate(8deg);
+
+    background:linear-gradient(135deg,#2c7be5,#38bdf8);
+}

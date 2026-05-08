@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>Mes réservations - CovoiTudiant</title>
+
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <link rel="stylesheet"
+    href="{% static 'navbar.css' %}">
+
+    <link rel="stylesheet"
+    href="{% static 'footer.css' %}">
+
+    <link rel="stylesheet"
+    href="{% static 'mesReservation.css' %}">
+    <link rel="stylesheet" href="{% static 'message.css' %}">
+
+</head>
+
+<body>
+
+{% include 'partials/navbar.html' %}
+{% include 'message/message.html' %}
+<div class="reservation-page">
+
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>
+                Mes réservations
+            </h1>
+
+            <p>
+                Consultez tous vos trajets réservés
+            </p>
+
+        </div>
+
+    </div>
+
+
+    {% if reservations %}
+
+    <div class="reservation-grid">
+
+        {% for reservation in reservations %}
+
+        <div class="reservation-card">
+
+            <div class="card-top">
+
+                <div class="driver">
+
+                    {% if reservation.trajet.conducteur_ref.photo %}
+
+                    <img
+                    src="{{ reservation.trajet.conducteur_ref.photo.url }}">
+
+                    {% else %}
+
+                    <img
+                    src="{% static 'default.png' %}">
+
+                    {% endif %}
+
+                    <div class="driver-info">
+
+                        <h3>
+                            {{ reservation.trajet.conducteur_ref.user.first_name }}
+                            {{ reservation.trajet.conducteur_ref.user.last_name }}
+                        </h3>
+
+                        <span>
+                            Conducteur
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="price">
+
+                    {{ reservation.trajet.prix }} DH
+
+                </div>
+
+            </div>
+
+            <div class="road">
+
+                <div class="line"></div>
+
+                <div class="dot dot-start"></div>
+
+                <div class="dot dot-end"></div>
+
+                <div class="city">
+
+                    <h2>
+                        {{ reservation.trajet.ville_depart }}
+                    </h2>
+
+                    <span>
+                        {{ reservation.trajet.heure_depart }}
+                    </span>
+
+                </div>
+
+                <div class="city">
+
+                    <h2>
+                        {{ reservation.trajet.ville_arrivee }}
+                    </h2>
+
+                    <span>
+                        Destination
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="infos">
+
+                <div class="info-box">
+
+                    <span>
+                        Date
+                    </span>
+
+                    <h3>
+                        {{ reservation.trajet.date }}
+                    </h3>
+
+                </div>
+
+  
+
+            </div>
+
+            <div class="actions">
+
+                <a href="{% url 'DetailReservation' reservation.id %}" 
+                class="details-btn">
+
+                    <i class="fa-solid fa-eye"></i>
+
+                    Voir détails
+
+            </a>
+                <form method="POST" action="{% url 'AnnulerReservation' reservation.id %}" > 
+                  {% csrf_token %}
+                <button
+                class="cancel-btn">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                    Annuler
+
+                </button>
+             </form>
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+
+    <div class="empty-state">
+
+        <div class="empty-icon">
+
+            <i class="fa-solid fa-calendar-xmark"></i>
+
+        </div>
+
+        <h2>
+            Aucune réservation
+        </h2>
+
+        <p>
+            Vous n'avez encore réservé aucun trajet.
+        </p>
+
+        <a href="{% url 'trajets' %}"
+        class="explore-btn">
+
+            <i class="fa-solid fa-road"></i>
+
+            Explorer les trajets
+
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% include 'partials/footer.html' %}
+<script>
+
+function closePopup(){
+
+    document
+    .querySelector('.popup-overlay')
+    .style.display='none';
+}
+
+</script>
+</body>
+
+</html>

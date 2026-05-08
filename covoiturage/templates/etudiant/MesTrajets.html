@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>Mes trajets - CovoiTudiant</title>
+
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <link rel="stylesheet"
+    href="{% static 'navbar.css' %}">
+
+    <link rel="stylesheet" href="{% static 'MesTrajets.css' %}">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <link rel="stylesheet" href="{% static 'message.css' %}">
+
+</head>
+
+<body>
+
+{% include 'partials/navbar.html' %}
+{% include 'message/message.html' %}
+
+<div class="container">
+
+
+    <div class="page-header">
+
+        <div class="title">
+
+            <h1>
+                Mes trajets
+            </h1>
+
+            <p>
+                Gérez vos trajets étudiants facilement
+            </p>
+
+        </div>
+
+        <a href="{% url 'AjouterTrajet' %}"
+        class="add-btn">
+
+            <i class="fa-solid fa-plus"></i>
+
+            Ajouter un trajet
+
+        </a>
+
+    </div>
+
+
+    <div class="trajets">
+    
+    {% if trajets %}
+
+
+    {% for trajet in trajets %}
+
+
+        <div class="trajet-card">
+
+            <div class="trajet-top">
+
+                <div class="price">
+                    {{ trajet.prix }} DH
+                </div>
+
+              
+            </div>
+
+            <div class="road">
+
+                <div class="line"></div>
+                
+                <div class="dot dot-start"></div>
+
+                <div class="dot dot-end"></div>
+            
+                <div class="city">
+
+                    <h2>{{ trajet.ville_depart }}</h2>
+
+                    <span>
+                        {{ trajet.heure_depart }}
+                    </span>
+
+                </div>
+
+                <div class="city">
+
+                    <h2>{{ trajet.ville_arrivee }}</h2>
+
+                    
+
+                </div>
+
+            </div>
+
+            <div class="infos">
+
+                <div class="info-box">
+
+                    <span>
+                        Date
+                    </span>
+
+                    <h3>
+                        {{ trajet.date }}
+                        </h3>
+
+                </div>
+
+                <div class="info-box">
+
+                    <span>
+                        Nombre Places
+                    </span>
+
+                    <h3>
+                    {{ trajet.nb_place }} places
+                    </h3>
+
+                </div>
+
+            </div>
+
+            <div class="actions">
+              
+                <a href="{% url 'ModifierTrajet' trajet.id %}" class="btn edit-btn">
+
+                    <i class="fa-solid fa-pen"></i>
+
+                    Modifier
+
+                </a>
+
+                <form
+                    method="POST"
+                    action="{% url 'SupprimerTrajet' trajet.id %}">
+
+                    {% csrf_token %}
+
+                    <button class="btn delete-btn">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                     Supprimer
+
+                </button>
+
+            </form>
+
+            </div>
+
+        </div>
+        {% endfor %}
+         {% else %}
+
+        <div class="empty-state">
+
+            <i class="fa-solid fa-road-circle-xmark"></i>
+
+            <h2>
+                Aucun trajet trouvé
+            </h2>
+
+            <p>
+                Vous n'avez encore publié aucun trajet.
+            </p>
+
+    
+
+        </div>
+
+    {% endif %}
+    </div>
+
+</div>
+
+{% include 'partials/footer.html' %}
+<script>
+
+function closePopup(){
+
+    document
+    .querySelector('.popup-overlay')
+    .style.display='none';
+}
+
+</script>
+</body>
+
+</html>

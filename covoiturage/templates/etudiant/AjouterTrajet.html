@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>Ajouter un trajet</title>
+
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <link rel="stylesheet"
+    href="{% static 'navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'AjouterTrajet.css' %}">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <link rel="stylesheet" href="{% static 'message.css' %}">
+
+</head>
+
+<body>
+
+{% include 'partials/navbar.html' %}
+{% include 'message/message.html' %}
+
+<div class="container">
+
+
+    <div class="header">
+
+        <h1>
+            Ajouter un trajet
+        </h1>
+
+        <p>
+            Publiez facilement votre trajet étudiant
+        </p>
+
+    </div>
+
+
+    <div class="form-card">
+
+        <div class="card-header">
+
+            <div class="card-icon">
+
+                <i class="fa-solid fa-road"></i>
+
+            </div>
+
+            <div>
+
+                <h2>
+                    Nouveau trajet
+                </h2>
+
+                <p>
+                    Remplissez les informations du trajet
+                </p>
+
+            </div>
+
+        </div>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="form-grid">
+
+
+                <div class="input-group">
+
+                    <label>
+                        Ville de départ
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <input
+                        type="text"
+                        name="ville_depart"
+                        placeholder="Ex : Rabat"
+                        required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Ville d'arrivée
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-map-location-dot"></i>
+
+                        <input
+                        type="text"
+                        name="ville_arrivee"
+                        placeholder="Ex : Casablanca"
+                        required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Date du trajet
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-calendar"></i>
+
+                        <input
+                        type="date"
+                        name="date"
+                        required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Heure de départ
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        <input
+                        type="time"
+                        name="heure_depart"
+                        required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Prix du trajet
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-money-bill-wave"></i>
+
+                        <input
+                        type="number"
+                        name="prix"
+                        placeholder="Ex : 35"
+                        required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Nombre de places
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-users"></i>
+
+                        <input
+                        type="number"
+                        name="nb_place"
+                        placeholder="Ex : 4"
+                        required>
+
+                    </div>
+
+                </div>
+
+  
+
+            </div>
+
+
+            <button
+            type="submit"
+            class="submit-btn">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Publier le trajet
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% include 'partials/footer.html' %}
+</body>
+
+</html>
