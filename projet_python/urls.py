@@ -36,6 +36,7 @@ urlpatterns = [
     path('MesReservations/', views.MesReservations_view, name='MesReservations'),
     path('AnnulerReservation/<int:id>/', views.AnnulerReservation_view, name='AnnulerReservation'),
     path('DetailReservation/<int:id>/', views.DetailReservation_view, name='DetailReservation'),
+    path('DetailTrajet/<int:id>/', views.DetailTrajet_view, name='DetailTrajet'),
 ]
 
 if settings.DEBUG:

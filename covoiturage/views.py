@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from httpx import request
 from django.db.models import Count, F
 from covoiturage.models import Etudiant, Trajet,Reservation
+from datetime import date
 
 def register_view(request):
     if request.method == 'POST':
@@ -192,15 +193,18 @@ def AjouterTrajet_view(request):
     if request.method == 'POST':
         ville_depart = request.POST['ville_depart']
         ville_arrivee = request.POST['ville_arrivee']
-        date = request.POST['date']
+        date_trajet = request.POST['date']
         heure_depart = request.POST['heure_depart']
         nb_place = request.POST['nb_place']
         prix = request.POST['prix']
+        if date_trajet < str(date.today()):
+            messages.error(request, "La date doit être dans le futur ou aujourd'hui")
+            return redirect('AjouterTrajet')
         Trajet.objects.create(
             conducteur_ref=Etudiant.objects.get(user=request.user),
             ville_depart=ville_depart,
             ville_arrivee=ville_arrivee,
-            date=date,
+            date=date_trajet,
             heure_depart=heure_depart,
             nb_place=nb_place,
             prix=prix
@@ -339,5 +343,22 @@ def DetailReservation_view(request, id):
 
         {
             'reservation': reservation
+        }
+    )
+@login_required
+def DetailTrajet_view(request, id):
+
+    trajet = Trajet.objects.get(id=id)
+
+    reservations = Reservation.objects.filter(
+        trajet=trajet
+    )
+
+    return render(
+        request,
+        'etudiant/detail_trajet.html',
+        {
+            'trajet': trajet,
+            'reservations': reservations
         }
     )

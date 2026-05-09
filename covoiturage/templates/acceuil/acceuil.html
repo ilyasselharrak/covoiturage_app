@@ -195,7 +195,7 @@
           
           {% if not trajet.est_complet and not trajet.est_reserver %}
 
-        <form action="ReserverTrajet/{{ trajet.id }}/"
+        <form action="{% url 'ReserverTrajet' trajet.id %}"
             method="POST">
 
         {% csrf_token %}

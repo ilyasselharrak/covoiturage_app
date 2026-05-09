@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Détails trajet - CovoiTudiant
+    </title>
+
+    <!-- ICONS -->
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+    href="{% static 'navbar.css' %}">
+
+    <link rel="stylesheet"
+    href="{% static 'footer.css' %}">
+
+  <link rel="stylesheet" href="{% static 'detailTrajet.css' %}">
+
+</head>
+
+<body>
+
+{% include 'partials/navbar.html' %}
+
+<div class="container">
+
+    <!-- HEADER -->
+
+    <div class="page-header">
+
+        <div class="title">
+
+            <h1>
+                Détails du trajet
+            </h1>
+
+            <p>
+                Consultez les étudiants ayant réservé ce trajet
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- TRAJET -->
+
+    <div class="trajet-card">
+
+              <!-- ETUDIANTS -->
+
+        <h2 class="section-title">
+
+            Étudiants réservés
+
+        </h2>
+
+        {% if reservations %}
+
+        <div class="students">
+
+            {% for reservation in reservations %}
+
+            <div class="student-card">
+
+                {% if reservation.etudiant.photo %}
+
+                <img
+                src="{{ reservation.etudiant.photo.url }}">
+
+                {% else %}
+
+                <img
+                src="{% static 'default.png' %}">
+
+                {% endif %}
+
+                <div class="student-info">
+
+                    <h3>
+
+                        {{ reservation.etudiant.user.first_name }}
+                        {{ reservation.etudiant.user.last_name }}
+
+                    </h3>
+
+                    <p>
+                        {{ reservation.etudiant.user.email }}
+                    </p>
+                    <p>
+                        {{ reservation.etudiant.telephone }}
+                    </p>
+                    <span>
+
+                        <i class="fa-solid fa-graduation-cap"></i>
+
+                        Étudiant
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty">
+
+            <i class="fa-solid fa-users-slash"></i>
+
+            <h2>
+                Aucune réservation
+            </h2>
+
+            <p>
+                Aucun étudiant n'a encore réservé ce trajet.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% include 'partials/footer.html' %}
+
+</body>
+
+</html>

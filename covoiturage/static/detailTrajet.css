@@ -1,0 +1,331 @@
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+
+            font-family:'Poppins',sans-serif;
+
+            background:
+            linear-gradient(
+            rgba(5,10,30,0.92),
+            rgba(5,10,30,0.95)),
+            url('https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1600&auto=format&fit=crop');
+
+            background-size:cover;
+            background-position:center;
+
+            color:white;
+
+            min-height:100vh;
+        }
+
+        .container{
+
+            width:90%;
+
+            margin:140px auto 60px;
+        }
+
+        /* HEADER */
+
+        .page-header{
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            margin-bottom:40px;
+        }
+
+        .title h1{
+
+            font-size:52px;
+
+            margin-bottom:10px;
+        }
+
+        .title p{
+
+            color:#cbd5e1;
+
+            font-size:18px;
+        }
+
+        /* TRAJET CARD */
+
+        .trajet-card{
+
+            background:
+            rgba(30,41,59,0.88);
+
+            backdrop-filter:blur(14px);
+
+            border:1px solid
+            rgba(255,255,255,0.08);
+
+            border-radius:32px;
+
+            padding:35px;
+
+            margin-bottom:35px;
+
+            box-shadow:
+            0 10px 35px rgba(0,0,0,0.35);
+        }
+
+        .top{
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            margin-bottom:35px;
+        }
+
+        .price{
+
+            background:
+            linear-gradient(
+            135deg,
+            #10b981,
+            #06b6d4);
+
+            padding:14px 26px;
+
+            border-radius:18px;
+
+            font-size:26px;
+
+            font-weight:bold;
+
+            box-shadow:
+            0 10px 25px rgba(16,185,129,0.35);
+        }
+
+        /* ROAD */
+
+        .road{
+
+            position:relative;
+
+            padding-left:70px;
+
+            margin-bottom:35px;
+        }
+
+        .road .line{
+
+            position:absolute;
+
+            left:22px;
+            top:10px;
+
+            width:4px;
+            height:120px;
+
+            background:
+            linear-gradient(
+            #3b82f6,
+            #10b981);
+
+            border-radius:20px;
+        }
+
+        .dot{
+
+            position:absolute;
+
+            left:10px;
+
+            width:28px;
+            height:28px;
+
+            border-radius:50%;
+        }
+
+        .dot-start{
+
+            top:0;
+
+            background:#3b82f6;
+        }
+
+        .dot-end{
+
+            bottom:0;
+
+            background:#10b981;
+        }
+
+        .city{
+
+            margin-bottom:45px;
+        }
+
+        .city h2{
+
+            font-size:42px;
+
+            margin-bottom:5px;
+        }
+
+        .city span{
+
+            color:#cbd5e1;
+
+            font-size:18px;
+        }
+
+        /* RESERVATIONS */
+
+        .section-title{
+
+            font-size:28px;
+
+            margin-bottom:25px;
+        }
+
+        .students{
+
+            display:grid;
+
+            grid-template-columns:
+            repeat(auto-fit,minmax(320px,1fr));
+
+            gap:25px;
+        }
+
+        .student-card{
+
+            background:
+            rgba(51,65,85,0.75);
+
+            border-radius:24px;
+
+            padding:22px;
+
+            display:flex;
+
+            align-items:center;
+
+            gap:18px;
+
+            transition:0.3s;
+
+            border:1px solid
+            rgba(255,255,255,0.05);
+        }
+
+        .student-card:hover{
+
+            transform:translateY(-6px);
+
+            box-shadow:
+            0 15px 35px rgba(0,0,0,0.35);
+        }
+
+        .student-card img{
+
+            width:85px;
+            height:85px;
+
+            border-radius:24px;
+
+            object-fit:cover;
+
+            border:3px solid #3b82f6;
+
+            background:white;
+        }
+
+        .student-info h3{
+
+            font-size:24px;
+
+            margin-bottom:8px;
+        }
+
+        .student-info p{
+
+            color:#cbd5e1;
+
+            margin-bottom:8px;
+        }
+
+        .student-info span{
+
+            display:inline-block;
+
+            background:
+            rgba(59,130,246,0.15);
+
+            color:#60a5fa;
+
+            padding:8px 14px;
+
+            border-radius:12px;
+
+            font-size:14px;
+        }
+
+        /* EMPTY */
+
+        .empty{
+
+            background:
+            rgba(51,65,85,0.75);
+
+            padding:35px;
+
+            border-radius:24px;
+
+            text-align:center;
+        }
+
+        .empty i{
+
+            font-size:60px;
+
+            margin-bottom:20px;
+
+            color:#94a3b8;
+        }
+
+        .empty h2{
+
+            margin-bottom:10px;
+        }
+
+        .empty p{
+
+            color:#cbd5e1;
+        }
+
+        @media(max-width:900px){
+
+            .page-header{
+
+                flex-direction:column;
+
+                align-items:flex-start;
+
+                gap:20px;
+            }
+
+            .title h1{
+
+                font-size:40px;
+            }
+
+            .city h2{
+
+                font-size:32px;
+            }
+        }

@@ -259,7 +259,7 @@ body{
 
     position:absolute;
 
-    top:80px;
+    top:28;
     right:0;
 
     width:320px;
@@ -292,10 +292,15 @@ body{
     display:flex;
     align-items:center;
     gap:15px;
+    border-left:none !important;
+    position:relative;
 
     margin-bottom:20px;
 }
+.dropdown-header::before{
 
+    display:none;
+}
 .big-avatar{
 
     width:65px;
@@ -358,10 +363,25 @@ body{
     width:20px;
 }
 
-.line{
-    height:1px;
-    background:#e5e7eb;
-    margin:10px 0;
+.dropdown-line{
+
+    position:absolute;
+
+    left:28px;
+
+    top:25px;
+
+    width:4px;
+
+    height:120px;
+
+    border-radius:20px;
+
+    background:
+    linear-gradient(
+    to bottom,
+    #38bdf8,
+    #10b981);
 }
 
 .logout{
