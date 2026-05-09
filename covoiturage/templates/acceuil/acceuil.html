@@ -192,7 +192,7 @@
 
             </div>
 
-          
+           {% if trajet %}
           {% if not trajet.est_complet and not trajet.est_reserver %}
 
         <form action="{% url 'ReserverTrajet' trajet.id %}"
@@ -235,6 +235,8 @@
             </button>
 
             {% endif %}  
+            {% endif %}  
+
             </div>
         
         </div>
