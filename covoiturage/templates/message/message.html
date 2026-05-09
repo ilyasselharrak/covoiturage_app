@@ -7,9 +7,15 @@
     <div class="popup-success">
 
         <div class="popup-icon">
-
+           {% if message.tags == 'success' %}
             <i class="fa-solid fa-circle-check"></i>
-
+           {% endif %}
+           {% if message.tags == 'error' %}
+            <i class="fa-solid fa-triangle-exclamation"></i>
+           {% endif %}
+           {% if message.tags == 'warning' %}
+            <i class="fa-solid fa-triangle-exclamation"></i>
+           {% endif %}
         </div>
 
         <h2>
