@@ -38,7 +38,6 @@ urlpatterns = [
     path('DetailReservation/<int:id>/', views.DetailReservation_view, name='DetailReservation'),
     path('DetailTrajet/<int:id>/', views.DetailTrajet_view, name='DetailTrajet'),
     path('Apropos/', views.Apropos_view, name='Apropos'),
-    path('rechercheTrajets/', views.rechercheTrajets_view, name='rechercheTrajets')
 ]
 
 if settings.DEBUG:
