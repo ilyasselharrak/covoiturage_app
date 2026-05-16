@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>
+        À propos - CovoiTudiant
+    </title>
+
+    <!-- ICONS -->
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+    href="{% static 'navbar.css' %}">
+
+    <link rel="stylesheet"
+    href="{% static 'footer.css' %}">
+    <link rel="stylesheet" href="{% static 'APropos.css' %}">
+  
+
+</head>
+
+<body>
+
+{% include 'partials/navbar.html' %}
+
+<div class="container">
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <h1>
+
+                À propos de
+                <span>
+                    CovoiTudiant
+                </span>
+
+            </h1>
+
+            <p>
+
+                CovoiTudiant est une plateforme moderne de covoiturage étudiant
+                permettant aux étudiants de partager leurs trajets,
+                économiser de l'argent et voyager dans une expérience
+                simple, rapide et sécurisée.
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="{% url 'trajets' %}"
+                class="btn primary-btn">
+
+                    <i class="fa-solid fa-road"></i>
+
+                    Explorer les trajets
+
+                </a>
+
+                <a href="#features"
+                class="btn secondary-btn">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                    Découvrir
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- CARD -->
+
+       
+        </div>
+
+    </section>
+
+    <!-- FEATURES -->
+
+    <section id="features">
+
+        <div class="section-title">
+
+            <h2>
+                Pourquoi choisir CovoiTudiant ?
+            </h2>
+
+            <p>
+                Une plateforme pensée spécialement pour les étudiants
+            </p>
+
+        </div>
+
+        <div class="features">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                </div>
+
+                <h3>
+                    Sécurité
+                </h3>
+
+                <p>
+
+                    Voyagez en toute sécurité grâce à des profils étudiants
+                    vérifiés et un système de réservation fiable.
+
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+
+                    <i class="fa-solid fa-wallet"></i>
+
+                </div>
+
+                <h3>
+                    Économie
+                </h3>
+
+                <p>
+
+                    Réduisez vos dépenses de transport en partageant
+                    les frais de trajet avec d'autres étudiants.
+
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+
+                    <i class="fa-solid fa-clock"></i>
+
+                </div>
+
+                <h3>
+                    Rapidité
+                </h3>
+
+                <p>
+
+                    Trouvez rapidement un trajet adapté à votre ville,
+                    votre horaire et votre budget.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- TEAM -->
+
+    <section>
+
+        <div class="section-title">
+
+            <h2>
+                Notre équipe
+            </h2>
+
+            <p>
+                Les étudiants derrière la plateforme
+            </p>
+
+        </div>
+
+        <div class="team">
+
+            <div class="team-card">
+
+                <img src="{% static 'images/ilyass.jpeg' %}">
+
+                <h3>
+                    Ilyass El Harrak
+                </h3>
+
+                <span>
+                    Développeur Full Stack
+                </span>
+
+                <p>
+
+                    Passionné par le développement web moderne
+                    et les solutions numériques intelligentes.
+
+                </p>
+
+            </div>
+
+            <div class="team-card">
+
+                <img src="{% static 'images/walid.png' %}">
+
+                <h3>
+                    Walid ANADIF
+                </h3>
+
+                <span>
+                    Développeur Full Stack
+                </span>
+
+                <p>
+
+                     Passionné par le développement web moderne
+                    et les solutions numériques intelligentes.
+
+                </p>
+
+            </div>
+
+            <div class="team-card">
+
+                <img src="{% static 'images/fayssal.png' %}">
+
+                <h3>
+                    Fayssal ABAIBAT
+                </h3>
+
+                <span>
+                    Développeur Full Stack
+                </span>
+
+                <p>
+
+                     Passionné par le développement web moderne
+                    et les solutions numériques intelligentes.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% include 'partials/footer.html' %}
+
+</body>
+
+</html>
